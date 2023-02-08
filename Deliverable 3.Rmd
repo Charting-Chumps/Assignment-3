@@ -19,7 +19,7 @@ Setting up the data
 ```{r}
 df <- read.csv("https://github.com/Charting-Chumps/Data/raw/main/2020_2021_Washington_Public_Schools_Student_Teacher_Ratio.csv")
 names(df)[1] <- 'County'
-df2 <- read.csv("https://raw.githubusercontent.com/alyssatn/RWorkshopHW/main/geographic_codes.csv")
+df2 <- read.csv("https://github.com/Charting-Chumps/Data/raw/main/geographic_codes.csv")
 ```
 
 Data Analysis/Cleaning
