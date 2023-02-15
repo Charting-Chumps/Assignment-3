@@ -1,6 +1,8 @@
 ---
 title: "Deliverable 3"
-output: html_notebook
+output:
+  github_document:
+    df_print: paged
 ---
 Packages
 ```{r}
@@ -10,7 +12,7 @@ library(ggplot2)
 library(scales)
 library(ggthemes)
 library(rio)
-library(pivottabler)
+#library(pivottabler)
 library(ggrepel)
 library(usmap)
 ```
@@ -86,11 +88,21 @@ pointbar1
 Student/Teacher ratio on top of WA map
 ```{r}
 names(df2)[1] <- 'County'
+names(df2)[3] <- "fips"
 
 waMapSchool <- left_join(df, df2, by = "County")
-names(waMapSchool)[8] <- "fips"
 
-plot_usmap(data = waMapSchool, values = "StudentToTeacherRatio", include = "WA") +
-  scale_fill_continuous(low = "white", high = "red")
+#Find average district Student to Teacher ratio and group in each County
+waMapSchool2 <- waMapSchool %>%
+  group_by(County) %>%
+#find average Student to teacher ratio   
+  mutate(mean(StudentToTeacherRatio))
+
+#Map the ratio on a WA map and show county boundaries 
+plot_usmap(data = waMapSchool2, values = "mean(StudentToTeacherRatio)", include = "WA") +
+#low = low number of students per teacher & high = high number of students per teacher 
+  scale_fill_continuous(low = "green", high = "red", name = "# of students per teacher") + 
+  labs(title = "Average District Student-to-Teacher Ratio across different WA Counties") +
+  theme(legend.position = "right")
+
 ```
-
