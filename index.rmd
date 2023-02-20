@@ -1,7 +1,7 @@
 ---
 title: "Deliverable 3"
 output:
-  github_document:
+  html_document:
     df_print: paged
 ---
 ```{r, message=FALSE,echo=FALSE,results='hide',warning=FALSE}
