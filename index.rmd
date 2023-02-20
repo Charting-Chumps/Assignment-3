@@ -30,9 +30,8 @@ STRmean = mean(df$StudentToTeacherRatio)
 WeightedSTRmean = sum(df$TotalStudentCount) / sum(df$TotalTeacherCount)
 ```
 
-Chart 1
-
-```{r, message=FALSE,results='hide',warning=FALSE}
+```{r, message=FALSE, echo = FALSE, results='hide',warning=FALSE}
+#Chart 1
 base = ggplot(df,aes(x = StudentToTeacherRatio,y = TotalStudentCount,
                        color = County,
                        label = DistrictName))
@@ -61,12 +60,10 @@ plot2 = plot1 +
                  y = 42000,
                  x=21.2,
                  angle=0)
-plot2
 ```
 
-Chart 2
-
-```{r, message=FALSE, results='hide',warning=FALSE}
+```{r, message=FALSE, echo = FALSE, results='hide',warning=FALSE}
+#Chart 2
 basepointbar = ggplot(df,aes(x = reorder(County,-StudentToTeacherRatio), #Reordered so that counties with a low student:teacher ratio show up first, and ones with higher student:teacher ratios show up later. We can change this to a different method if we want. I tried reordering by the number of students but that clumped up all the big dots in the same area, so it was kinda ugly
                      y = StudentToTeacherRatio,
                      color = County, #We do not really need this but it make it look nicer.
@@ -83,10 +80,10 @@ pointbar1 = basepointbar +
         plot.title = element_text(hjust = 0.5, size = 12),
         axis.title = element_text(size = 10)) +
   guides(color = "none") #this gets rid of the legend for each county, super ugly
-pointbar1
+
 ```
 
-Chart 3
+Chart
 ```{r}
 names(df2)[1] <- 'County'
 names(df2)[3] <- "fips"
